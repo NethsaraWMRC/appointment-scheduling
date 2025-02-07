@@ -36,7 +36,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "black" }}>
+    <AppBar position="static" sx={{ backgroundColor: "rgba(29,33,38, 1)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

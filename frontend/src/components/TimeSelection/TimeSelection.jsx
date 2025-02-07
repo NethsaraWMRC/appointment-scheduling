@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import TimeCard from "./TimeCard";
 
@@ -57,7 +57,7 @@ function TimeSelection() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: "50%",
+
         overflow: "scroll",
         scrollbarWidth: "none",
         alignItems: "center",
@@ -65,14 +65,6 @@ function TimeSelection() {
         padding: "0 10px",
       }}
     >
-      <Typography
-        sx={{
-          marginBottom: "15px",
-        }}
-      >
-        Pick a Time
-      </Typography>
-
       {timeArray.map((item, index) => (
         <TimeCard
           key={index}

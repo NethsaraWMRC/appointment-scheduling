@@ -16,7 +16,8 @@ function TimeCard({ cardIndex, startTime, endTime, isSelect, onSelect }) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: isSelect ? "red" : "white",
+        backgroundColor: isSelect ? "rgba(29,33,38, 0.8)" : "white",
+        color: isSelect ? "white" : "black",
         cursor: "pointer",
         transition: "all 0.15s ease",
         marginBottom: "15px",
@@ -24,7 +25,8 @@ function TimeCard({ cardIndex, startTime, endTime, isSelect, onSelect }) {
 
         "&:hover": {
           transform: "scale(1.02)",
-          backgroundColor: "red",
+          backgroundColor: "rgba(29,33,38, 0.8)",
+          color: "white",
         },
       }}
       onClick={handleClick}
