@@ -1,5 +1,5 @@
-import { Box, Radio, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
+import React from "react";
 
 function TimeCard({ cardIndex, startTime, endTime, isSelect, onSelect }) {
   const handleClick = () => {
@@ -16,7 +16,7 @@ function TimeCard({ cardIndex, startTime, endTime, isSelect, onSelect }) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: isSelect ? "rgba(29,33,38, 0.8)" : "white",
+        backgroundColor: isSelect ? "rgba(29,33,38, 0.65)" : "white",
         color: isSelect ? "white" : "black",
         cursor: "pointer",
         transition: "all 0.15s ease",
@@ -25,7 +25,7 @@ function TimeCard({ cardIndex, startTime, endTime, isSelect, onSelect }) {
 
         "&:hover": {
           transform: "scale(1.02)",
-          backgroundColor: "rgba(29,33,38, 0.8)",
+          backgroundColor: "rgba(29,33,38, 0.65)",
           color: "white",
         },
       }}

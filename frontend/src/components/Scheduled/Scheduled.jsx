@@ -2,7 +2,15 @@ import { Box, Checkbox, Typography } from "@mui/material";
 import React from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-function Scheduled({ date, startTime, endTime }) {
+function Scheduled({
+  selectedDate,
+  startTime,
+  endTime,
+  setIsNotificationChecked,
+}) {
+  const handleCheckboxChange = (event) => {
+    setIsNotificationChecked(event.target.checked);
+  };
   return (
     <Box
       sx={{
@@ -36,9 +44,16 @@ function Scheduled({ date, startTime, endTime }) {
           color: "black",
         }}
       >
-        {date && startTime && endTime ? (
-          <Box>
-            <Typography>{date}</Typography>
+        {selectedDate || (startTime && endTime) ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Typography>{selectedDate}</Typography>
+
             <Typography>
               {startTime} - {endTime}
             </Typography>
@@ -68,7 +83,11 @@ function Scheduled({ date, startTime, endTime }) {
           </Box>
         </Box>
 
-        <Checkbox color="default" sx={{ color: "white" }} />
+        <Checkbox
+          color="default"
+          sx={{ color: "white" }}
+          onChange={handleCheckboxChange}
+        />
       </Box>
     </Box>
   );

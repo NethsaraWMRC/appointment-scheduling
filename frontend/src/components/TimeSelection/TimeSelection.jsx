@@ -1,56 +1,29 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import TimeCard from "./TimeCard";
+import { fetchAvailableTimeSlots } from "../../API/FetchAvailableTimeSlots";
 
-const timeArray = [
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-  {
-    startTime: "9.00AM",
-    endTime: "10.00AM",
-  },
-];
-
-function TimeSelection() {
+function TimeSelection({ selectedDate, setSelectedTime }) {
   const [selectedCardIndex, setSelectedCardIndex] = useState(-1);
+  const [timeArray, setTimeArray] = useState([]);
+
+  useEffect(() => {
+    fetchTimeSlots();
+  }, [selectedDate]);
+
+  const fetchTimeSlots = async () => {
+    try {
+      const response = await fetchAvailableTimeSlots(selectedDate);
+      setTimeArray(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelect = (index) => {
+    setSelectedCardIndex(index);
+    setSelectedTime(timeArray[index]);
+  };
 
   return (
     <Box
@@ -65,16 +38,17 @@ function TimeSelection() {
         padding: "0 10px",
       }}
     >
-      {timeArray.map((item, index) => (
-        <TimeCard
-          key={index}
-          cardIndex={index}
-          startTime={item.startTime}
-          endTime={item.endTime}
-          isSelect={selectedCardIndex === index}
-          onSelect={setSelectedCardIndex}
-        />
-      ))}
+      {timeArray &&
+        timeArray.map((item, index) => (
+          <TimeCard
+            key={index}
+            cardIndex={index}
+            startTime={item.startTime}
+            endTime={item.endTime}
+            isSelect={selectedCardIndex === index}
+            onSelect={() => handleSelect(index)}
+          />
+        ))}
     </Box>
   );
 }
