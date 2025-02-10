@@ -1,32 +1,47 @@
 package com.example.backend.models;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "appointments")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class appointmentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-    private String email;
-    private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) 
+    private user user;
+
+    @ManyToOne
+    @JoinColumn(name = "time_slot_id", nullable = false) 
+    private timeSlot timeSlot;
+
+    @Column(columnDefinition = "TEXT")
+    private String fullname;
+
+    @Column(columnDefinition = "TEXT")
     private String message;
-    private LocalDate selectedDate;
-    private LocalTime selectedTime;
-    private boolean isNotificationChecked;
-    
+
+    @Column(columnDefinition = "TEXT")
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.BOOKED;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    public enum Status {
+        BOOKED, CANCELED
+    }
 }
