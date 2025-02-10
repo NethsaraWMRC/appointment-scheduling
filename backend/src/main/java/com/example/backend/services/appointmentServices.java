@@ -2,6 +2,8 @@ package com.example.backend.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -69,5 +71,31 @@ public class appointmentServices {
 
     }
 
-    
+    public List<appointmentDto> getAppointmentListByUser(Long userId){
+        List<appointmentModel> appointmentList =  appointmentRepo.findByUserId(userId);
+
+        return appointmentList.stream().map(appointmentItem -> modelMapper.map(appointmentItem, appointmentDto.class)).collect(Collectors.toList());
+    }
+
+    public appointmentDto cancelAppointment(Long appointmentId){
+        Optional<appointmentModel> optionalAppointment = appointmentRepo.findById(appointmentId);
+
+        if (optionalAppointment.isEmpty()) {
+            throw new RuntimeException("Appointment not found");
+        }
+
+       
+            appointmentModel appointment =  optionalAppointment.get();
+            appointment.setStatus(Status.CANCELED);
+            appointmentRepo.save(appointment);
+
+            // Update the time slot to be available again
+            timeSlot slot = appointment.getTimeSlot();
+            slot.setIsAvailable(true);
+            timeSlotRepo.save(slot); 
+
+            return modelMapper.map(appointment, appointmentDto.class);
+        
+    }
+
 }
