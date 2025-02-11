@@ -6,7 +6,7 @@ export const createAppointment = async (appointment) => {
   console.log("app", appointment);
   try {
     const response = await axios.post(base_url + "/create-appointment", {
-      userId: 1,
+      userId: appointment.userId,
       timeSlotId: appointment.selectedTime.id,
       fullname: appointment.fullName,
       message: appointment.message,

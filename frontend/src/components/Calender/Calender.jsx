@@ -20,12 +20,22 @@ export default function Calender({
   };
 
   return (
-    <Box>
+    <Box
+      sx={
+        {
+          // backgroundColor: "red",
+          // width: "100vw",
+        }
+      }
+    >
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           value={selectedDate}
           onChange={handleDateChange}
           shouldDisableDate={disablePastDates}
+          sx={{
+            width: "100%",
+          }}
         />
       </LocalizationProvider>
     </Box>

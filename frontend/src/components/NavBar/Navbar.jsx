@@ -18,7 +18,7 @@ const pages = [
   { label: "Home", path: "/" },
   { label: "Appointments", path: "/appointments" },
 ];
-const settings = ["Logout"];
+const settings = [{ label: "Logout", path: "/login" }];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -58,7 +58,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            AP.Sch
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -119,7 +119,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            AP.Sch
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -161,9 +161,15 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting}
-                  </Typography>
+                  <Link
+                    to={setting.path}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    onClick={() => localStorage.removeItem("user")}
+                  >
+                    <Typography sx={{ textAlign: "center" }}>
+                      {setting.label}
+                    </Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

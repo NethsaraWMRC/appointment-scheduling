@@ -3,6 +3,7 @@ package com.example.backend.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.AppointmentResponseDto;
 import com.example.backend.dto.appointmentDto;
 import com.example.backend.services.appointmentServices;
 
@@ -38,7 +39,7 @@ public class appointments {
     }
     
     @GetMapping("/get-user-appointments")
-    public ResponseEntity<List<appointmentDto>> getUserAppointments(@RequestParam Long userId) {
+    public ResponseEntity<List<AppointmentResponseDto>> getUserAppointments(@RequestParam Long userId) {
 
         return ResponseEntity.ok(appointmentServices.getAppointmentListByUser(userId));
     }

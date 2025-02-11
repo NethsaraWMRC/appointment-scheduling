@@ -33,13 +33,14 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody userDto userDto) {
+        System.out.println(userDto);
        
         userDto authUser = userService.login(userDto.getEmail(),userDto.getPassword());
         
         if(authUser!=null){
             return ResponseEntity.ok(authUser);
         }else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.ok("Invalid username or password");
         }
     }
     

@@ -10,9 +10,6 @@ export const fetchAvailableTimeSlots = async (date) => {
     const response = await axios.get(base_url + "/timeslot/get-time-slots", {
       params: { date: date },
     });
-    // const dummy = convertedTimeData;
-
-    // console.log(response.data);
 
     return response.data;
   } catch (error) {

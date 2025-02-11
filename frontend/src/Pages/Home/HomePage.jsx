@@ -53,7 +53,7 @@ function HomePage() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", md: "row" },
           width: "50%",
           height: "70vh",
           justifyContent: "space-between",
@@ -62,7 +62,7 @@ function HomePage() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: { xs: "column-reverse", md: "column" },
           }}
         >
           <Calender
@@ -105,6 +105,7 @@ function HomePage() {
               display: "flex",
               flexDirection: "column",
               width: "50%",
+              minWidth: "200px",
               height: "100%",
               justifyContent: "space-between",
             }}
@@ -128,6 +129,7 @@ function HomePage() {
                   borderRadius: "10px",
                   backgroundColor: "rgba(9, 13, 17, 0.8)",
                   width: "50%",
+                  marginBottom: "15px",
                 }}
                 onClick={handleNavigation}
                 disabled={!selectedTime}

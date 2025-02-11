@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.backend.dto.AppointmentResponseDto;
 import com.example.backend.dto.appointmentDto;
 import com.example.backend.models.appointmentModel;
 import com.example.backend.models.appointmentModel.Status;
@@ -71,10 +72,10 @@ public class appointmentServices {
 
     }
 
-    public List<appointmentDto> getAppointmentListByUser(Long userId){
+    public List<AppointmentResponseDto> getAppointmentListByUser(Long userId){
         List<appointmentModel> appointmentList =  appointmentRepo.findByUserId(userId);
 
-        return appointmentList.stream().map(appointmentItem -> modelMapper.map(appointmentItem, appointmentDto.class)).collect(Collectors.toList());
+        return appointmentList.stream().map(appointmentItem -> modelMapper.map(appointmentItem, AppointmentResponseDto.class)).collect(Collectors.toList());
     }
 
     public appointmentDto cancelAppointment(Long appointmentId){

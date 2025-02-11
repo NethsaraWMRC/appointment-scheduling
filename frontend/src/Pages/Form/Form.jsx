@@ -7,6 +7,8 @@ function Form() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const { selectedDate, selectedTime, isNotificationChecked } =
     location.state || {};
 
@@ -66,7 +68,7 @@ function Form() {
     if (validateForm()) {
       const dataToSend = {
         fullName: formData.fullName,
-
+        userId: user.id,
         phoneNumber: formData.phoneNumber,
         message: formData.message,
         selectedDate,
@@ -81,7 +83,7 @@ function Form() {
         console.log(error);
       }
 
-      navigate("/");
+      navigate("/appointments");
     }
   };
 
@@ -166,6 +168,7 @@ function Form() {
               borderRadius: "10px",
               backgroundColor: "rgba(9, 13, 17, 0.8)",
               width: "50%",
+              minWidth: "150px",
             }}
             onClick={handleSubmit}
           >

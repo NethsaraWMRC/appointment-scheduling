@@ -29,6 +29,7 @@ function Scheduled({
         backgroundColor: "rgba(29,33,38, 0.8)",
         borderRadius: "10px",
         padding: "15px",
+        minWidth: "100%",
       }}
     >
       <Typography
@@ -60,9 +61,19 @@ function Scheduled({
               width: "100%",
             }}
           >
-            <Typography>{selectedDate}</Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "12px", md: "16px" },
+              }}
+            >
+              {selectedDate}
+            </Typography>
 
-            <Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "12px", md: "16px" },
+              }}
+            >
               {formatTime(startTime)} - {formatTime(endTime)}
             </Typography>
           </Box>
