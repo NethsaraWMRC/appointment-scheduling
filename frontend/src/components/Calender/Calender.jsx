@@ -5,13 +5,18 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Box } from "@mui/material";
 import dayjs from "dayjs";
 
-export default function Calender({ selectedDate, setSelectedDate }) {
+export default function Calender({
+  selectedDate,
+  setSelectedDate,
+  setSelectedTime,
+}) {
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
+    setSelectedTime(null);
   };
 
   const disablePastDates = (date) => {
-    return date.isBefore(dayjs(), "day");
+    return date.isBefore(dayjs(), "day") || date.isSame(dayjs(), "day");
   };
 
   return (

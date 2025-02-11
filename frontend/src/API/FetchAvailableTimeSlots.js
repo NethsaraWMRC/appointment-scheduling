@@ -5,10 +5,16 @@ const base_url = "http://localhost:8080/api/v1";
 
 export const fetchAvailableTimeSlots = async (date) => {
   try {
-    // const response = await axios.get("/get-time-slot/" + date);
-    const response = convertedTimeData;
+    date = date?.format("YYYY-MM-DD");
 
-    return response;
+    const response = await axios.get(base_url + "/timeslot/get-time-slots", {
+      params: { date: date },
+    });
+    // const dummy = convertedTimeData;
+
+    // console.log(response.data);
+
+    return response.data;
   } catch (error) {
     console.log("error fetching data", error);
   }

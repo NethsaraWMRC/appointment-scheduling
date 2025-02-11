@@ -1,9 +1,12 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createAppointment } from "../../API/CreateAppointment";
 
 function Form() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { selectedDate, selectedTime, isNotificationChecked } =
     location.state || {};
 
@@ -16,7 +19,6 @@ function Form() {
 
   const [errors, setErrors] = useState({
     fullName: "",
-    email: "",
     phoneNumber: "",
     message: "",
   });
@@ -35,15 +37,6 @@ function Form() {
     // Check if full name is filled
     if (!formData.fullName) {
       newErrors.fullName = "Full Name is required.";
-      isValid = false;
-    }
-
-    // Check if email is valid
-    if (!formData.email) {
-      newErrors.email = "Email is required.";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is not valid.";
       isValid = false;
     }
 
@@ -67,13 +60,13 @@ function Form() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       const dataToSend = {
         fullName: formData.fullName,
-        email: formData.email,
+
         phoneNumber: formData.phoneNumber,
         message: formData.message,
         selectedDate,
@@ -81,7 +74,14 @@ function Form() {
         isNotificationChecked,
       };
 
-      console.log("Form Data to send to backend:", dataToSend);
+      try {
+        const res = await createAppointment(dataToSend);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+
+      navigate("/");
     }
   };
 
@@ -122,19 +122,6 @@ function Form() {
           onChange={handleInputChange}
           error={!!errors.fullName}
           helperText={errors.fullName}
-          sx={{ height: "50px", "& .MuiInputBase-root": { height: "100%" } }}
-        />
-
-        <Typography sx={{ marginBottom: "10px" }}>Email</Typography>
-        <TextField
-          id="email"
-          name="email"
-          label="Email"
-          variant="outlined"
-          value={formData.email}
-          onChange={handleInputChange}
-          error={!!errors.email}
-          helperText={errors.email}
           sx={{ height: "50px", "& .MuiInputBase-root": { height: "100%" } }}
         />
 

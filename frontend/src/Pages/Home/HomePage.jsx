@@ -4,11 +4,12 @@ import TimeSelection from "../../components/TimeSelection/TimeSelection";
 import { Box, Button, Typography } from "@mui/material";
 import Scheduled from "../../components/Scheduled/Scheduled";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 function HomePage() {
   const navigation = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs().add(1, "day"));
   const [selectedTime, setSelectedTime] = useState(null);
   const [isNotificationChecked, setIsNotificationChecked] = useState(false);
 
@@ -67,6 +68,7 @@ function HomePage() {
           <Calender
             setSelectedDate={setSelectedDate}
             selectedDate={selectedDate}
+            setSelectedTime={setSelectedTime}
           />
           <Scheduled
             selectedDate={selectedDate?.format("YYYY-MM-DD")}
@@ -77,49 +79,62 @@ function HomePage() {
         </Box>
 
         {/* Time Slection */}
-
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "50%",
 
-            justifyContent: "center",
+            width: "100%",
+
+            alignItems: "center",
           }}
         >
           <Typography
             sx={{
               marginTop: "15px",
               marginLeft: "15px",
+              fontSize: "20px",
+              fontWeight: 500,
             }}
           >
             Pick a Time
           </Typography>
 
-          <TimeSelection
-            selectedDate={selectedDate}
-            setSelectedTime={setSelectedTime}
-          />
-
           <Box
             sx={{
-              width: "100%",
               display: "flex",
-              justifyContent: "center",
+              flexDirection: "column",
+              width: "50%",
+              height: "100%",
+              justifyContent: "space-between",
             }}
           >
-            <Button
-              variant="contained"
+            <TimeSelection
+              selectedDate={selectedDate}
+              setSelectedTime={setSelectedTime}
+            />
+
+            <Box
               sx={{
-                margin: "25px 15px 0 15px",
-                borderRadius: "10px",
-                backgroundColor: "rgba(9, 13, 17, 0.8)",
-                width: "50%",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
               }}
-              onClick={handleNavigation}
             >
-              Book Now
-            </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  margin: "25px 15px 0 15px",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(9, 13, 17, 0.8)",
+                  width: "50%",
+                }}
+                onClick={handleNavigation}
+                disabled={!selectedTime}
+              >
+                Book Now
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>

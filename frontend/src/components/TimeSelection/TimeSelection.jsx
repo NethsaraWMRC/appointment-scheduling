@@ -1,7 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TimeCard from "./TimeCard";
 import { fetchAvailableTimeSlots } from "../../API/FetchAvailableTimeSlots";
+import dayjs from "dayjs";
 
 function TimeSelection({ selectedDate, setSelectedTime }) {
   const [selectedCardIndex, setSelectedCardIndex] = useState(-1);
@@ -38,17 +39,30 @@ function TimeSelection({ selectedDate, setSelectedTime }) {
         padding: "0 10px",
       }}
     >
-      {timeArray &&
-        timeArray.map((item, index) => (
-          <TimeCard
-            key={index}
-            cardIndex={index}
-            startTime={item.startTime}
-            endTime={item.endTime}
-            isSelect={selectedCardIndex === index}
-            onSelect={() => handleSelect(index)}
-          />
-        ))}
+      {timeArray.length > 0 ? (
+        timeArray.map(
+          (item, index) =>
+            item.isAvailable && (
+              <TimeCard
+                key={index}
+                cardIndex={index}
+                startTime={dayjs(item?.startTime, "HH:mm:ss").format("HH:mm")}
+                endTime={dayjs(item?.endTime, "HH:mm:ss").format("HH:mm")}
+                isSelect={selectedCardIndex === index}
+                onSelect={() => handleSelect(index)}
+              />
+            )
+        )
+      ) : (
+        <Typography
+          sx={{
+            opacity: 0.35,
+          }}
+        >
+          {" "}
+          No available time slots
+        </Typography>
+      )}
     </Box>
   );
 }

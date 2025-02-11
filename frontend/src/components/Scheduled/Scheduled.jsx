@@ -11,6 +11,14 @@ function Scheduled({
   const handleCheckboxChange = (event) => {
     setIsNotificationChecked(event.target.checked);
   };
+
+  const formatTime = (time) => {
+    if (time) {
+      return time.substring(0, 5);
+    }
+    return "";
+  };
+
   return (
     <Box
       sx={{
@@ -55,7 +63,7 @@ function Scheduled({
             <Typography>{selectedDate}</Typography>
 
             <Typography>
-              {startTime} - {endTime}
+              {formatTime(startTime)} - {formatTime(endTime)}
             </Typography>
           </Box>
         ) : (
