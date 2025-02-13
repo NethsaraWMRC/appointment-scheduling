@@ -27,9 +27,10 @@ function AppointmentCard({
         height: "auto",
         backgroundColor: "rgb(252, 248, 248)",
         borderRadius: "15px",
-        boxShadow: "2px 5px 5px rgba(0,0,0,0.1)",
+        boxShadow: "2px 5px 5px rgba(0,0,0,0.05)",
         padding: "15px",
         marginBottom: "25px",
+        border: "1px solid rgba(0,0,0,0.2)",
       }}
     >
       <Typography>

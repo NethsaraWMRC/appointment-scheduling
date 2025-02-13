@@ -36,6 +36,7 @@ function Scheduled({
         sx={{
           fontSize: "20px",
           fontWeight: 600,
+          marginBottom: "5px",
         }}
       >
         Scheduling
@@ -50,6 +51,7 @@ function Scheduled({
           backgroundColor: "white",
           borderRadius: "5px",
           fontSize: "16px",
+
           color: "black",
         }}
       >
@@ -84,7 +86,7 @@ function Scheduled({
         )}
       </Box>
 
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           marginTop: "15px",
@@ -107,7 +109,7 @@ function Scheduled({
           sx={{ color: "white" }}
           onChange={handleCheckboxChange}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 }
