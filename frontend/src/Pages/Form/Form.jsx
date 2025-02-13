@@ -7,7 +7,7 @@ function Form() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = JSON.parse(localStorage.getItem("userId"));
 
   const { selectedDate, selectedTime, isNotificationChecked } =
     location.state || {};
@@ -68,7 +68,7 @@ function Form() {
     if (validateForm()) {
       const dataToSend = {
         fullName: formData.fullName,
-        userId: user.id,
+        userId: userId,
         phoneNumber: formData.phoneNumber,
         message: formData.message,
         selectedDate,

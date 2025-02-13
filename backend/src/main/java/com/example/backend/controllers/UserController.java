@@ -7,6 +7,8 @@ import com.example.backend.dto.userDto;
 import com.example.backend.models.user;
 import com.example.backend.services.UserService;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,16 +34,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> userLogin(@RequestBody userDto userDto) {
-        System.out.println(userDto);
-       
-        userDto authUser = userService.login(userDto.getEmail(),userDto.getPassword());
-        
-        if(authUser!=null){
-            return ResponseEntity.ok(authUser);
-        }else{
-            return ResponseEntity.ok("Invalid username or password");
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String password = loginData.get("password");
+
+        String token = userService.login(email, password);
+        System.out.println("generated token"+token);
+        if (token == null) {
+            return ResponseEntity.status(401).body("Invalid credentials");
         }
+        return ResponseEntity.ok(Map.of("token", token));
     }
     
     

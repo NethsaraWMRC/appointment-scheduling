@@ -1,12 +1,13 @@
-import axios from "axios";
-
-const base_url = "http://localhost:8080/api/v1/appointment";
+import axiosInstance from "./axiosInstance";
 
 export const fetchAppointment = async (userId) => {
   try {
-    const response = await axios.get(base_url + "/get-user-appointments", {
-      params: { userId: userId },
-    });
+    const response = await axiosInstance.get(
+      "/appointment/get-user-appointments",
+      {
+        params: { userId: userId },
+      }
+    );
 
     return response.data;
   } catch (error) {

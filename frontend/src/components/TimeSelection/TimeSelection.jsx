@@ -39,7 +39,7 @@ function TimeSelection({ selectedDate, setSelectedTime }) {
         padding: "0 10px",
       }}
     >
-      {timeArray.length > 0 ? (
+      {timeArray && timeArray.length > 0 ? (
         timeArray.map(
           (item, index) =>
             item.isAvailable && (

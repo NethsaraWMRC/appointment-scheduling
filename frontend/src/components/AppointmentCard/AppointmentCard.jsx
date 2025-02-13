@@ -28,16 +28,16 @@ function AppointmentCard({
         backgroundColor: "rgb(252, 248, 248)",
         borderRadius: "15px",
         boxShadow: "2px 5px 5px rgba(0,0,0,0.1)",
-        padding: "10px",
+        padding: "15px",
         marginBottom: "25px",
       }}
     >
       <Typography>
-        <span style={{ fontWeight: 600 }}>Scheduled Date -</span>{" "}
+        <span style={{ fontWeight: 600, opacity: 0.7 }}>Scheduled Date -</span>{" "}
         <span style={{ fontSize: "14px", opacity: 0.7 }}>{date}</span>
       </Typography>
       <Typography>
-        <span style={{ fontWeight: 600 }}>Scheduled Date -</span>{" "}
+        <span style={{ fontWeight: 600, opacity: 0.7 }}>Scheduled Date -</span>{" "}
         <span style={{ fontSize: "14px", opacity: 0.7 }}>
           {startTime} - {endTime}
         </span>

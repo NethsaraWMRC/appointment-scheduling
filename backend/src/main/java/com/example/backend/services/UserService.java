@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend.dto.userDto;
 import com.example.backend.repo.UserRepo;
-
+import com.example.backend.security.JwtUtil;
 import com.example.backend.models.user;
 
 import jakarta.transaction.Transactional;
@@ -24,6 +24,9 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+     @Autowired
+    private JwtUtil jwtUtil;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -37,19 +40,18 @@ public class UserService {
         return modelMapper.map(userRepo.save(newUser), userDto.class);
     }
 
-    public userDto login(String email, String password){
+    public String login(String email, String password) {
         Optional<user> optionalUser = userRepo.findByEmail(email);
 
-        if(optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             user foundUser = optionalUser.get();
 
-            if(passwordEncoder.matches(password, foundUser.getPasswordHash())){
-                return modelMapper.map(foundUser, userDto.class);
+            if (passwordEncoder.matches(password, foundUser.getPasswordHash())) {
+              
+                return jwtUtil.generateToken(email, foundUser.getId());
             }
         }
-
         return null;
-
     }
     
 }

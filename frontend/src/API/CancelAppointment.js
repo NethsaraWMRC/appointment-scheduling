@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const base_url = "http://localhost:8080/api/v1/appointment";
+import axiosInstance from "./axiosInstance";
 
 export const cancelAppointment = async (appointmentId) => {
   try {
-    const response = await axios.put(
-      base_url + "/" + appointmentId + "/cancel"
+    const response = await axiosInstance.put(
+      "/appointment/" + appointmentId + "/cancel"
     );
 
     return response.data;

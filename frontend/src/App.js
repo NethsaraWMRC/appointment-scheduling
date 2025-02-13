@@ -5,11 +5,14 @@ import SignUp from "./components/SignUp/SignUp";
 import Appointments from "./Pages/Appointments/Appointments";
 import Form from "./Pages/Form/Form";
 import HomePage from "./Pages/Home/HomePage";
+import AuthProvider from "./Auth/AuthProvider";
 
 function App() {
   return (
     <BrowserRouter>
-      <MainLayout />
+      <AuthProvider>
+        <MainLayout />
+      </AuthProvider>
     </BrowserRouter>
   );
 }
@@ -23,10 +26,11 @@ function MainLayout() {
     <>
       {shouldShowNavbar && <Navbar />}
       <Routes>
+        <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/form" element={<Form />} />
         <Route path="/appointments" element={<Appointments />} />
-        <Route path="/login" element={<SignIn />} />
+
         <Route path="/register" element={<SignUp />} />
       </Routes>
     </>

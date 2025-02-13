@@ -60,13 +60,14 @@ export default function SignIn(props) {
 
       console.log("Login Response:", res);
 
-      if (!res.userId) {
+      if (!res.token) {
         setLoginErrorMessage("Invalid email or password. Please try again.");
+        return;
       } else {
         setLoginErrorMessage("");
       }
 
-      localStorage.setItem("user", JSON.stringify(res));
+      localStorage.setItem("token", JSON.stringify(res.token));
 
       navigate("/");
     } catch (error) {

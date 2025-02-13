@@ -7,7 +7,7 @@ function Appointments() {
   const [appointments, setAppointments] = useState();
   const [isChange, setIsChange] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = JSON.parse(localStorage.getItem("userId"));
 
   useEffect(() => {
     fetchAppointments();
@@ -15,7 +15,7 @@ function Appointments() {
 
   const fetchAppointments = async () => {
     try {
-      const res = await fetchAppointment(user.id);
+      const res = await fetchAppointment(userId);
       setAppointments(res);
       console.log(res);
     } catch (error) {

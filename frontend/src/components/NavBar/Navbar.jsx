@@ -164,7 +164,10 @@ function Navbar() {
                   <Link
                     to={setting.path}
                     style={{ textDecoration: "none", color: "inherit" }}
-                    onClick={() => localStorage.removeItem("user")}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("userId");
+                    }}
                   >
                     <Typography sx={{ textAlign: "center" }}>
                       {setting.label}

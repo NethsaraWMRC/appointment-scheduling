@@ -85,6 +85,8 @@ export default function SignUp(props) {
 
       console.log(res);
 
+      alert("User Registration Successfull!");
+
       navigate("/login");
     } catch (error) {
       console.log(error);
